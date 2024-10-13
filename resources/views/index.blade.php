@@ -13,7 +13,7 @@
     @vite('resources/css/app.css')
 </head>
 
-<body class="w-screen h-screen">
+<body>
     @include('header')
 <h1>Index</h1>
 <a href="/expenses/new">Nuevo gasto</a>

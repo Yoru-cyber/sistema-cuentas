@@ -7,7 +7,7 @@ use App\Models\Income;
 use App\Http\Controllers\ProfitController;
 Route::get('/', function () {
     return view('index');
-});
+})->name('index');
 Route::get('/expenses', function () {
     /**
      * @var Expense[] $expenses
@@ -16,7 +16,10 @@ Route::get('/expenses', function () {
     $total = 1000;
     // Pasar el array a la vista
     return view('expenses.index', ['expenses' => $expenses, 'total' => $total]);
-});
-Route::get('/profit', [ProfitController::class, 'index']);
+})->name('expenses.index');
+Route::get('/profit', [ProfitController::class, 'index'])->name('profit.index');
 Route::get('/profit/new', [ProfitController::class, 'create']);
 Route::post('/profit/new', [ProfitController::class, 'create']);
+Route::get('/profit/{id}', [ProfitController::class, 'edit'])->name('profit.edit');
+Route::post('/profit/{id}', [ProfitController::class, 'edit']);
+Route::post('/profit/delete/{id}', [ProfitController::class, 'destroy'])->name('profit.destroy');
