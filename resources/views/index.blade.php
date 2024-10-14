@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Expenses</title>
+    <title>Sistema cuentas</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -15,10 +15,14 @@
 
 <body>
     @include('header')
-<h1>Index</h1>
-<a href="/expenses/new">Nuevo gasto</a>
-<a href="/income/new">Nuevo entrada</a>
-<a href="/profit/new">Nuevo Mes</a>
+    <div class="flex flex-col h-screen w-screen justify-center items-center">
+        <h1 class="text-3xl text-zinc-800 tracking-tighter font-semibold mb-2">Acciones rápidas</h1>
+        <ul class="flex flex-row space-x-3">
+            <li><a href={{ route('expense.new') }} class="btn btn-outline btn-primary w-fit p-2">Nuevo gasto</a></li>
+            <li><a class="btn btn-outline btn-secondary w-fit p-2">Nuevo entrada</a></li>
+            <li><a class="btn btn-outline btn-accent w-fit p-2" href="/profit/new">Nuevo Mes</a></li>
+        </ul>
+    </div>
 </body>
 
 </html>

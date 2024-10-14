@@ -1,6 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-body{
-    background-color: white;
+@layer base {
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    input[type="number"] {
+        appearance: textfield;
+    }
+}
+body {
+    background-color: #f8f8ff;
+    color: #afafaf;
 }

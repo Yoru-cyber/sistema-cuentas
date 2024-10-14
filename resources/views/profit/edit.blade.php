@@ -19,24 +19,35 @@
         @csrf
 
         <div class="form-group">
-            <label for="income">Income</label>
-            <input type="number" id="income" name="income" class="form-control" step="any" value={{$profit->income}} required>
-            @error('income')
+            <label for="name">Nombre</label>
+            <input type="number" id="name" name="name" class="form-control" step="any"
+                value={{ $expense->name }} required>
+            @error('name')
                 <div class="text-danger">{{ $message }}</div>
             @enderror
         </div>
 
         <div class="form-group">
-            <label for="total">Total</label>
-            <input type="number" id="total" name="total" class="form-control" step="any" value={{$profit->total}} required>
-            @error('total')
+            <label for="value">Valor</label>
+            <input type="number" id="value" name="value" class="form-control" step="any"
+                value={{ $expense->value }} required>
+            @error('value')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <div class="form-group">
+            <label for="profit_id">Mes y Año</label>
+            <input type="number" id="profit_id" name="profit_id" class="form-control" step="any"
+                value={{ $expense->profit_id }} required>
+            @error('profit_id')
                 <div class="text-danger">{{ $message }}</div>
             @enderror
         </div>
 
         <div class="form-group">
             <label for="date">Date</label>
-            <input type="date" id="date" name="date" class="form-control" value={{$profit->date}} required>
+            <input type="date" id="date" name="date" class="form-control" value={{ $expense->date }} required>
             @error('date')
                 <div class="text-danger">{{ $message }}</div>
             @enderror

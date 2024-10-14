@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Expenses</title>
+    <title>Profits</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -60,8 +60,8 @@
      
 
     </div>
-        <a href="/profit/new" class="btn btn-outline btn-success fixed w-36 bottom-0 right-0 mb-5 m-2">Nuevo mes
-            <x-heroicon-o-document-plus class="w-6 h-6" /></a>
+        {{-- <a href={{route('profit.new')}} class="btn btn-outline btn-success fixed w-36 bottom-0 right-0 mb-5 m-2">Nuevo mes
+            <x-heroicon-o-document-plus class="w-6 h-6" /></a> --}}
 </body>
 
 </html>
