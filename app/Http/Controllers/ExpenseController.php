@@ -13,13 +13,18 @@ class ExpenseController extends Controller
     public function index(Request $request): View
     {
         $requestedDate = $request->query('date');
-        if ($requestedDate != null) {
-            Log::info('Date: ' . $requestedDate);
-            $expenses = Expense::orderBy('id', 'ASC')->where('date', 'like', '%' . $requestedDate . '%')->paginate(12);
-            return view('expense.index', ['expenses' => $expenses]);
-        }
-        $expenses = Expense::orderBy('id', 'ASC')->paginate(12);
+        $requestedName = $request->query('name');
+        $expenses = Expense::orderBy('id', 'ASC')
+            ->when($requestedName, function ($query) use ($requestedName) {
+                return $query->where('name', 'like', "%{$requestedName}%");
+            })
+            ->when($requestedDate, function ($query) use ($requestedDate) {
+                return $query->orWhere('date', 'like', "%{$requestedDate}%");
+            })
+            ->paginate(12);
         return view('expense.index', ['expenses' => $expenses]);
+
+
     }
     public function create(Request $request)
     {
