@@ -3,10 +3,10 @@
     <div class="flex flex-col w-screen h-screen justify-center items-center">
         <form action="" method="POST" class="w-[90vw] sm:w-3/12 p-5 space-y-5 bg-slate-100  shadow-lg  text-zinc-800">
             <div class="flex flex-col w-full justify-center">
-                <span class="inline-flex justify-center items-center">
+                <div class="inline-flex justify-center items-center">
                     <h1 class="text-center text-xl text-zinc-800">Actualizar Gasto</h1><x-heroicon-o-shopping-bag
                         class="w-8 h-8  mx-2" />
-                </span>
+                </div>
             </div>
             @csrf
 

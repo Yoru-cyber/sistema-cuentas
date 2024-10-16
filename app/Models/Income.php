@@ -15,4 +15,8 @@ class Income extends Model
         'profit_id',
         'date',
     ];
+    public function profit()
+    {
+        return $this->belongsTo(Profit::class);
+    }
 }
