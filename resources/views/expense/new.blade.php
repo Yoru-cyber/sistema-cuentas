@@ -1,20 +1,5 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Expenses</title>
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
-    @vite('resources/css/app.css')
-</head>
-
-<body>
-    @include('header')
+<x-layout.main>
+    <x-slot:title>Nuevo Gasto</x-slot:title>
     <div class="flex flex-col w-screen h-screen justify-center items-center">
         <form action="" method="POST" class="w-3/12 p-5 space-y-5 bg-slate-100  shadow-lg  text-zinc-800">
             <div class="flex flex-col w-full justify-center">
@@ -73,10 +58,6 @@
                 <button type="submit" class="btn btn-outline btn-success">Agregar
                     <x-heroicon-o-document-plus class="w-6 h-6" /></button>
             </div>
-
         </form>
     </div>
-
-</body>
-
-</html>
+</x-layout.main>

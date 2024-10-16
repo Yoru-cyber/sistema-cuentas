@@ -1,30 +1,15 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Expenses</title>
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
-    @vite('resources/css/app.css')
-</head>
-@include('header')
-
-<body>
+<x-layout.main>
+    <x-slot:title>Gastos</x-slot:title>
     <h1 class="text-3xl text-zinc-800 font-semibold tracking-tighter text-center">Gastos</h1>
     <div class="flex flex-col justify-center items-center w-full">
         <form action="" method="GET" class="flex flex-row p-5 w-fit space-x-3">
             <label class="input input-bordered flex items-center gap-2 bg-white" for="name">
                 <x-heroicon-o-magnifying-glass class="w-6 h-6" />
-                <input type="text" id="name" name="name" class="grow" placeholder="Nombre"/>
+                <input type="text" id="name" name="name" class="grow" placeholder="Nombre" />
             </label>
             <label class="input input-bordered flex items-center gap-2 bg-white" for="date">
                 <x-heroicon-o-calendar class="w-6 h-6" />
-                <input type="text" id="date" name="date" class="grow" placeholder="Fecha"/>
+                <input type="text" id="date" name="date" class="grow" placeholder="Fecha" />
             </label>
 
             <button class="btn btn-outline btn-info" type="submit"><x-heroicon-o-magnifying-glass
@@ -80,6 +65,4 @@
                 class="btn btn-outline btn-success fixed w-36 bottom-0 right-0 mb-5 m-2 p-2">Nuevo Gasto
                 <x-heroicon-o-document-plus class="w-6 h-6" /></a>
         </div>
-</body>
-
-</html>
+</x-layout.main>
