@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\IncomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfitController;
 use Illuminate\Http\Request;
@@ -15,6 +16,15 @@ Route::group(['prefix' => 'expense'], function () {
     Route::get('{id}', [ExpenseController::class, 'edit'])->name('expense.edit');
     Route::post('{id}', [ExpenseController::class, 'edit']);
     Route::post('delete/{id}', [ExpenseController::class, 'destroy'])->name('expense.destroy');
+
+});
+Route::group(['prefix' => 'income'], function () {
+    Route::get('', [IncomeController::class, 'index'])->name('income.index');
+    Route::get('new', [IncomeController::class, 'create'])->name('income.new');
+    Route::post('new', [IncomeController::class, 'create']);
+    Route::get('{id}', [IncomeController::class, 'edit'])->name('income.edit');
+    Route::post('{id}', [IncomeController::class, 'edit']);
+    Route::post('delete/{id}', [IncomeController::class, 'destroy'])->name('income.destroy');
 
 });
 Route::group(['prefix' => 'profit'], function () {
