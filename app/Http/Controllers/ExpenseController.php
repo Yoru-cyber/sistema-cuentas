@@ -6,7 +6,6 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Illuminate\Support\Facades\Log;
 class ExpenseController extends Controller
 {
     //
@@ -28,16 +27,11 @@ class ExpenseController extends Controller
     }
     public function create(Request $request)
     {
-
         if ($request->isMethod('get')) {
-
             return view('expense.new');
         } elseif ($request->isMethod('post')) {
-            $post = new Expense;
-            $post->name = $request->name;
-            $post->profit_id = $request->profit_id;
-            $post->value = $request->value;
-            $post->date = $request->date;
+            $validatedData = $request->validate(['name' => 'required|max:255', 'value' => 'required|numeric', 'profit_id' => 'required|numeric', 'date' => 'required|date']);
+            $post = new Expense($validatedData);
             $post->save();
             return redirect('expense')->with('status', 'New entry added');
         } else {
@@ -54,10 +48,8 @@ class ExpenseController extends Controller
         } elseif ($request->isMethod('get')) {
             return view('expense.edit', ['expense' => $expense]);
         } elseif ($request->isMethod('post')) {
-            $expense->income = $request->income;
-            $expense->total = $request->total;
-            $expense->date = $request->date;
-            $expense->save();
+            $validatedData = $request->validate(['name' => 'required|max:255', 'value' => 'required|numeric', 'profit_id' => 'required|numeric', 'date' => 'required|date']);
+            $expense->save($validatedData);
             return redirect('expense');
         }
     }

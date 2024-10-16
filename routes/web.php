@@ -1,42 +1,35 @@
 <?php
 
 use App\Http\Controllers\ExpenseController;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfitController;
 use Illuminate\Http\Request;
-
+use App\Models\Expense;
 Route::get('/', function () {
     return view('index');
 })->name('index');
-Route::get('/expense', [ExpenseController::class, 'index'])->name('expense.index');
-Route::get('/expense/new', [ExpenseController::class, 'create'])->name('expense.new');
-Route::post('/expense/new', [ExpenseController::class, 'create']);
-Route::get('/expense/{id}', [ExpenseController::class, 'edit'])->name('expense.edit');
-Route::post('/expense/{id}', [ExpenseController::class, 'edit']);
-Route::post('/expense/delete/{id}', [ExpenseController::class, 'destroy'])->name('expense.destroy');
-Route::get('/profit', [ProfitController::class, 'index'])->name('profit.index');
-Route::get('/profit/new', [ProfitController::class, 'create']);
-Route::post('/profit/new', [ProfitController::class, 'create']);
-Route::get('/profit/{id}', [ProfitController::class, 'edit'])->name('profit.edit');
-Route::post('/profit/{id}', [ProfitController::class, 'edit']);
-Route::post('/profit/delete/{id}', [ProfitController::class, 'destroy'])->name('profit.destroy');
+Route::group(['prefix' => 'expense'], function () {
+    Route::get('', [ExpenseController::class, 'index'])->name('expense.index');
+    Route::get('new', [ExpenseController::class, 'create'])->name('expense.new');
+    Route::post('new', [ExpenseController::class, 'create']);
+    Route::get('{id}', [ExpenseController::class, 'edit'])->name('expense.edit');
+    Route::post('{id}', [ExpenseController::class, 'edit']);
+    Route::post('delete/{id}', [ExpenseController::class, 'destroy'])->name('expense.destroy');
+
+});
+Route::group(['prefix' => 'profit'], function () {
+    Route::get('', [ProfitController::class, 'index'])->name('profit.index');
+    Route::get('new', [ProfitController::class, 'create']);
+    Route::post('new', [ProfitController::class, 'create']);
+    Route::get('{id}', [ProfitController::class, 'edit'])->name('profit.edit');
+    Route::post('{id}', [ProfitController::class, 'edit']);
+    Route::post('delete/{id}', [ProfitController::class, 'destroy'])->name('profit.destroy');
+});
 Route::get('/month', function (Request $request) {
     $requestedDate = $request->query('date');
-    if ($requestedDate != null) {
-        $months = DB::table('expense')
-            ->where('date', 'like', '%' . $requestedDate . '%')
-            ->select(DB::raw("date as formatted_date"))
-            ->groupBy('formatted_date')
-            ->orderByRaw('MIN(date) ASC')
-            ->paginate(12);
-        return view('month.index', compact('months'));
-    } else {
-        $months = DB::table('expense')
-            ->select(DB::raw("date as formatted_date"))
-            ->groupBy('formatted_date')
-            ->orderByRaw('MIN(date) ASC')
-            ->paginate(12);
-        return view('month.index', compact('months'));
-    }
+    $expenses = Expense::select(['date', 'value'])->orderBy('date', 'ASC')
+        ->when($requestedDate, function ($query) use ($requestedDate) {
+            return $query->where('date', 'like', '%' . $requestedDate . '%');
+        })->paginate(12);
+    return view('month.index', ['expenses' => $expenses]);
 })->name('month.index');
