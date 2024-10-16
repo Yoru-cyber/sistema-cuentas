@@ -2,24 +2,29 @@
     <x-slot:title>Gastos</x-slot:title>
     <h1 class="text-3xl text-zinc-800 font-semibold tracking-tighter text-center">Gastos</h1>
     <div class="flex flex-col justify-center items-center w-full">
-        <form action="" method="GET" class="flex flex-row p-5 w-fit space-x-3">
-            <label class="input input-bordered flex items-center gap-2 bg-white" for="name">
-                <x-heroicon-o-magnifying-glass class="w-6 h-6" />
-                <input type="text" id="name" name="name" class="grow" placeholder="Nombre" />
-            </label>
-            <label class="input input-bordered flex items-center gap-2 bg-white" for="date">
-                <x-heroicon-o-calendar class="w-6 h-6" />
-                <input type="text" id="date" name="date" class="grow" placeholder="Fecha" />
-            </label>
+        <form action="" method="GET" class="flex flex-col sm:flex-row flex-wrap justify-center w-fit sm:space-x-3">
+            <div class="form-group">
+                <label class="input input-bordered flex items-center gap-2 bg-white" for="name">
+                    <x-heroicon-o-magnifying-glass class="w-6 h-6" />
+                    <input type="text" id="name" name="name" class="grow" placeholder="Nombre" />
+                </label>
+            </div>
+            <div class="form-group">
 
-            <button class="btn btn-outline btn-info" type="submit"><x-heroicon-o-magnifying-glass
+                <label class="input input-bordered flex items-center gap-2 bg-white" for="date">
+                    <x-heroicon-o-calendar class="w-6 h-6" />
+                    <input type="text" id="date" name="date" class="grow" placeholder="Fecha" />
+                </label>
+            </div>
+
+            <button class="btn btn-outline btn-info order-1" type="submit"><x-heroicon-o-magnifying-glass
                     class="w-6 h-6" />Buscar</button>
 
         </form>
     </div>
     <div id="content" class="flex flex-col items-center w-screen h-screen mt-5">
         <div
-            class="overflow-x-auto bg-white border-solid border-2 w-3/6 border-zinc-200 shadow-2xl text-zinc-700 rounded-lg">
+            class="overflow-x-auto bg-white border-solid border-2 lg:w-3/6 w-screen border-zinc-200 shadow-2xl text-zinc-700 rounded-lg">
             <table class="table table-sm">
                 <!-- head -->
                 <thead class="text-lg text-zinc-600 text-center">
@@ -61,8 +66,8 @@
                 </tbody>
             </table>
             {{ $expenses->links() }}
-            <a href={{ route('expense.new') }}
-                class="btn btn-outline btn-success fixed w-36 bottom-0 right-0 mb-5 m-2 p-2">Nuevo Gasto
-                <x-heroicon-o-document-plus class="w-6 h-6" /></a>
         </div>
+        <a href={{ route('expense.new') }}
+            class="btn btn-outline btn-success fixed w-36 bottom-0 right-0 mb-10 sm:mb-5 m-2 p-2">Nuevo Gasto
+            <x-heroicon-o-document-plus class="w-6 h-6" /></a>
 </x-layout.main>
